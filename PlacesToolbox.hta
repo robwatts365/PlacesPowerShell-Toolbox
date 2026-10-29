@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>Places Toolbox | Watts365</title>
+<!--
+  Watts365 Places Toolbox
+      Version: v1.0
+      Date: 29/10/2026
+      Author: Rob Watts (UC Rob) | watts365.com
+  A front end for the Microsoft Places PowerShell module. Double-click to run (needs PowerShell 7.4+).
+-->
+<HTA:APPLICATION ID="PlacesToolbox" APPLICATIONNAME="Watts365PlacesToolbox" ICON="app/watts365.ico"
+  BORDER="thick" CAPTION="yes" MAXIMIZEBUTTON="yes" MINIMIZEBUTTON="yes" SHOWINTASKBAR="yes"
+  SINGLEINSTANCE="yes" SYSMENU="yes" WINDOWSTATE="normal" SCROLL="no" CONTEXTMENU="yes" SELECTION="yes" INNERBORDER="no" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="app/styles.css">
+</head>
+<body>
+
+<div id="header">
+  <div class="bar">
+    <span class="wordmark">Watts<b>365</b></span>
+    <span class="product">Places Toolbox</span>
+    <div id="chips"></div>
+  </div>
+  <!-- The signal line: one per layout -->
+  <div id="signal" aria-hidden="true">
+    <div class="flat left"></div>
+    <svg width="60" height="28" viewBox="0 0 60 28"><polyline points="1,14 12,3 23,25 35,3 46,25 57,14" fill="none" stroke="#E39B2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    <div class="flat right"></div>
+  </div>
+</div>
+
+<div id="shell">
+  <div id="nav">
+    <input id="navSearch" placeholder="Search cmdlets and recipes">
+    <div id="navList"></div>
+    <div id="navFoot">
+      <div class="lockup"><span class="wordmark light">Watts<b>365</b></span><span class="by">by</span><span class="ucrob"><span class="pill">UC</span>Rob</span></div>
+      <a data-act="url" data-url="https://watts365.com">watts365.com</a>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="view"></div>
+    <div id="splitter" title="Drag to resize"></div>
+    <div id="dock">
+      <div id="dockBar">
+        <span class="dTab active" data-act="dtab" data-tab="log">Output</span>
+        <span class="dTab" data-act="dtab" data-tab="results">Results</span>
+        <span class="dTab" data-act="dtab" data-tab="history">History</span>
+        <span id="dockStatus"></span>
+        <div id="progress" class="hidden"><div></div></div>
+        <button id="btnCancel" class="dBtn stop hidden" data-act="cancel">Cancel</button>
+        <button class="dBtn" data-act="engineWindow" title="Bring the PowerShell engine window to the front">Engine window</button>
+        <button class="dBtn" data-act="clearLog">Clear</button>
+      </div>
+      <div id="hint" class="hint hidden">Still waiting? Sign-in may be waiting in your browser, or the command may be asking for input in the engine window. <a data-act="engineWindow">Show engine window</a></div>
+      <div id="logPane" class="dPane"><div id="log"></div></div>
+      <div id="results" class="dPane hidden">
+        <div id="resBar">
+          <input id="resFilter" class="in" placeholder="Filter results">
+          <span id="resInfo" class="info"></span>
+          <button class="btn small ghost" data-act="copyResults">Copy</button>
+          <button class="btn small" data-act="exportResults">Export CSV</button>
+        </div>
+        <div id="resTable"></div>
+      </div>
+      <div id="history" class="dPane hidden"></div>
+    </div>
+  </div>
+</div>
+
+<div id="modalBack" class="hidden" data-act="closeModal"></div>
+<div id="modal" class="hidden"></div>
+<div id="toast" class="hidden"></div>
+<div id="fileHolder"></div>
+
+<script src="app/catalog.js"></script>
+<script src="app/app.js"></script>
+</body>
+</html>

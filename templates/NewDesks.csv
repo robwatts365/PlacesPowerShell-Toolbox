@@ -1,0 +1,6 @@
+DeskName,Mailbox,BuildingName,FloorName,SectionName,Mode,User
+Desk 1.001,desk1001@contoso.com,Contoso House,Floor 1,West Wing,Reservable,
+Desk 1.002,desk1002@contoso.com,Contoso House,Floor 1,West Wing,Drop-in,
+Desk 1.003,,Contoso House,Floor 1,West Wing,Assigned,alex@contoso.com
+Desk 1.004,,Contoso House,Floor 1,West Wing,New,
+Desk 1.005,,Contoso House,Floor 1,West Wing,Maintenance,

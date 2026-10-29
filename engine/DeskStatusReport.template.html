@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desk Status Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14212B; --teal: #0B7A85; --amber: #E39B2D; --paper: #F6F7F4; --night: #0E171D;
+    --bright: #5CC8D0; --deep: #08606A; --tint: #DDF0F1; --slate: #5A6873; --mist: #E3E8E6; --card: #FFFFFF;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); }
+  header { background: var(--night); color: #F6F7F4; padding: 28px 32px 0; }
+  .wordmark { font-family: var(--display); font-size: 26px; letter-spacing: -0.015em; font-weight: 500; }
+  .wordmark b { font-weight: 800; color: var(--bright); }
+  .eyebrow { font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--bright); }
+  header h1 { font: 700 34px/1.15 var(--display); letter-spacing: -0.015em; margin: 18px 0 4px; }
+  header .meta { color: #A9B4BB; font-size: 14px; }
+  .signal { display: flex; align-items: center; height: 46px; margin: 18px -32px 0; }
+  .signal .flat { height: 3px; background: var(--amber); border-radius: 2px; }
+  .signal svg { flex: 0 0 auto; }
+  main { padding: 24px 32px 48px; max-width: 1400px; margin: 0 auto; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .tile { background: var(--card); border: 1px solid var(--mist); border-radius: 12px; padding: 14px 16px; cursor: pointer; }
+  .tile.on { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
+  .tile .n { font: 700 28px var(--display); }
+  .tile .l { font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--slate); }
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .filters select, .filters input { font: 15px var(--body); padding: 8px 10px; border: 1px solid var(--mist); border-radius: 8px; background: var(--card); color: var(--ink); min-width: 180px; }
+  .filters input { flex: 1; }
+  .group { background: var(--card); border: 1px solid var(--mist); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+  .group h2 { font: 600 18px var(--display); margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--mist); display: flex; gap: 10px; align-items: baseline; }
+  .group h2 small { font: 400 13px var(--mono); color: var(--slate); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--slate); padding: 8px 16px; background: #FBFCFA; }
+  td { padding: 8px 16px; border-top: 1px solid var(--mist); vertical-align: top; }
+  .badge { display: inline-block; font: 500 12px var(--mono); padding: 2px 8px; border-radius: 999px; }
+  .m-Reservable { background: var(--tint); color: var(--deep); }
+  .m-DropIn { background: #E4EEF7; color: #24527A; }
+  .m-Assigned { background: #FBEFD9; color: #7A4E0E; }
+  .m-Unavailable { background: #F6E1DE; color: #9A3324; }
+  .m-other { background: var(--mist); color: var(--slate); }
+  .muted { color: var(--slate); }
+  .empty { padding: 40px; text-align: center; color: var(--slate); }
+  footer { display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; border-top: 1px solid var(--mist); font: 12px var(--mono); color: var(--slate); }
+  footer .by { display: flex; align-items: center; gap: 8px; }
+  .ucrob { font: 600 14px var(--display); color: var(--ink); display: inline-flex; align-items: center; gap: 3px; }
+  .ucrob span { background: var(--teal); color: #fff; border-radius: 999px; padding: 0 7px; font-weight: 800; }
+  @media (max-width: 640px) { header, main, footer { padding-left: 16px; padding-right: 16px; } .signal { margin: 18px -16px 0; } td, th { padding: 8px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wordmark">Watts<b>365</b></div>
+  <h1>Desk status report</h1>
+  <div class="eyebrow">Microsoft Places · __REPORTDATE__</div>
+  <div class="signal" aria-hidden="true">
+    <div class="flat" style="flex:1"></div>
+    <svg width="96" height="46" viewBox="0 0 96 46"><polyline points="0,32 14,8 30,42 46,8 62,42 76,32 96,32" fill="none" stroke="#E39B2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="flat" style="width:22%"></div>
+  </div>
+</header>
+<main>
+  <div class="tiles" id="tiles"></div>
+  <div class="filters">
+    <select id="fBuilding"><option value="">All buildings</option></select>
+    <select id="fFloor"><option value="">All floors</option></select>
+    <input id="fSearch" type="search" placeholder="Search desk, section or person">
+  </div>
+  <div id="groups"></div>
+</main>
+<footer>
+  <span>watts365.com</span>
+  <span class="by">Watts365 by <span class="ucrob"><span>UC</span>Rob</span></span>
+</footer>
+<script>
+const DATA = /*__DATA__*/[];
+const MODES = ['Reservable', 'DropIn', 'Assigned', 'Unavailable'];
+const LABEL = { DropIn: 'Drop-in' };
+let modeFilter = '';
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const uniq = (rows, k) => [...new Set(rows.map(r => r[k]).filter(Boolean))].sort();
+
+function fill(sel, values, first) {
+  const cur = sel.value;
+  sel.innerHTML = `<option value="">${first}</option>` + values.map(v => `<option>${esc(v)}</option>`).join('');
+  if (values.includes(cur)) sel.value = cur;
+}
+function filtered(ignoreMode) {
+  const b = $('fBuilding').value, f = $('fFloor').value, q = $('fSearch').value.toLowerCase();
+  return DATA.filter(r => (!b || r.BuildingName === b) && (!f || r.FloorName === f) &&
+    (ignoreMode || !modeFilter || r.ModeName === modeFilter) &&
+    (!q || [r.DeskName, r.SectionName, r.AssignedPersonEmail].join(' ').toLowerCase().includes(q)));
+}
+function render() {
+  fill($('fFloor'), uniq(DATA.filter(r => !$('fBuilding').value || r.BuildingName === $('fBuilding').value), 'FloorName'), 'All floors');
+  const base = filtered(true);
+  $('tiles').innerHTML = [['', 'All desks', base.length]].concat(MODES.map(m => [m, LABEL[m] || m, base.filter(r => r.ModeName === m).length]))
+    .map(([m, l, n]) => `<div class="tile ${modeFilter === m ? 'on' : ''}" data-m="${m}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+  const rows = filtered(false);
+  if (!rows.length) { $('groups').innerHTML = '<div class="group empty">No desks match these filters.</div>'; return; }
+  const groups = {};
+  rows.forEach(r => { const k = [r.BuildingName || '(no building)', r.FloorName || '(no floor)', r.SectionName || '(no section)'].join(' › '); (groups[k] = groups[k] || []).push(r); });
+  $('groups').innerHTML = Object.keys(groups).sort().map(k => `
+    <div class="group"><h2>${esc(k)} <small>${groups[k].length} desk(s)</small></h2>
+    <table><thead><tr><th>Desk</th><th>Mode</th><th>Detail</th></tr></thead><tbody>
+    ${groups[k].map(r => `<tr><td>${esc(r.DeskName)}</td>
+      <td><span class="badge ${MODES.includes(r.ModeName) ? 'm-' + r.ModeName : 'm-other'}">${esc(LABEL[r.ModeName] || r.ModeName || 'Unknown')}</span></td>
+      <td class="muted">${esc(r.UnavailableReason || r.AssignedPersonEmail || r.AssignedPersonId || '')}</td></tr>`).join('')}
+    </tbody></table></div>`).join('');
+}
+fill($('fBuilding'), uniq(DATA, 'BuildingName'), 'All buildings');
+$('tiles').addEventListener('click', e => { const t = e.target.closest('.tile'); if (t) { modeFilter = t.dataset.m; render(); } });
+['fBuilding', 'fFloor'].forEach(id => $(id).addEventListener('change', render));
+$('fSearch').addEventListener('input', render);
+render();
+</script>
+</body>
+</html>

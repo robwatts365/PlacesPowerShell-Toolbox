@@ -1,0 +1,7 @@
+PlaceName,Type,Mailbox,ParentBuildingName,ParentFloorName,ParentSectionName,BuildingDescription,BuildingCountryCode,BuildingState,BuildingCity,BuildingStreet,BuildingPostalCode,RoomCapacity
+Contoso House,Building,,,,,Head office,GB,Greater London,London,1 Example Road,EC1A 1AA,
+Floor 1,Floor,,Contoso House,,,,,,,,,
+West Wing,Section,,Contoso House,Floor 1,,,,,,,,
+Boardroom,Room,boardroom@contoso.com,Contoso House,Floor 1,,,,,,,,12
+Neighbourhood A,Workspace,neighbourhooda@contoso.com,Contoso House,Floor 1,West Wing,,,,,,,
+Desk 1.001,Desk,desk1001@contoso.com,Contoso House,Floor 1,West Wing,,,,,,,
